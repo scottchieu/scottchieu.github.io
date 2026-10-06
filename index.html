@@ -12,6 +12,18 @@
 		<meta name="description" content="Scott Chieu, mechanical engineering student at the University of Kansas: CFD, FEA, mechanical design, and Formula SAE." />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			#projects .image:before { display: none; }
+			.fig-row { display: flex; gap: 1rem; margin-bottom: 0.5rem; }
+			.fig-row .image { flex: 1; margin: 0; }
+			.fig-row img { width: 100%; display: block; }
+			.fig-caption { font-size: 0.8rem; opacity: 0.75; margin: 0 0 2rem 0; }
+			.stat-row { display: flex; gap: 1rem; margin-bottom: 2rem; text-align: center; }
+			.stat-row div { flex: 1; border: solid 1px rgba(255, 255, 255, 0.3); border-radius: 4px; padding: 1rem 0.5rem; }
+			.stat-row strong { display: block; font-size: 1.5rem; }
+			.stat-row span { font-size: 0.8rem; opacity: 0.8; }
+			@media screen and (max-width: 480px) { .fig-row, .stat-row { flex-direction: column; } }
+		</style>
 	</head>
 	<body class="is-preload">
 
@@ -85,6 +97,69 @@
 								<p><em>Picasso Exotic Aquatics &middot; 2025 &ndash; present</em></p>
 								<p>Performed stress and strain analysis on aquarium stands and the floors supporting them to verify they could safely carry 700+ gallon systems.</p>
 								<p><strong>Tools:</strong> Patran (FEA)</p>
+								<hr />
+
+								<h3>Aquarium Front Glass FEA: Bracing vs. Glass Thickness</h3>
+								<p><em>Structural study &middot; July 2026</em></p>
+								<p>Aquarium builders control front-glass bowing in one of two ways. Framed tanks add a center brace across the top. Rimless tanks use thicker glass. I built a finite element model of a 75-gallon aquarium's front panel to compare the two approaches directly, keeping everything else constant.</p>
+								<div class="stat-row">
+									<div><strong>87%</strong><span>less bowing with a center brace</span></div>
+									<div><strong>85%</strong><span>less bowing with 12&nbsp;mm glass</span></div>
+									<div><strong>72%</strong><span>lower peak stress with 12&nbsp;mm glass</span></div>
+								</div>
+
+								<h4>The Model</h4>
+								<p>I modeled the 48.5&nbsp;in &times; 21.25&nbsp;in front panel as a soda-lime glass shell with a 0.5&nbsp;in Quad4 mesh (4,400 elements). The water load was applied as a hydrostatic pressure that increases linearly from 0&nbsp;psi at the waterline to 0.767&nbsp;psi at the bottom, for a total of 395&nbsp;lbf. The bottom and side edges were restrained out-of-plane to represent the frame. I ran three cases, changing only one variable at a time:</p>
+								<div class="table-wrapper">
+									<table>
+										<thead>
+											<tr><th>Case</th><th>Glass</th><th>Center brace</th><th>Purpose</th></tr>
+										</thead>
+										<tbody>
+											<tr><td>1</td><td>1/4 in</td><td>Yes</td><td>Braced baseline</td></tr>
+											<tr><td>2</td><td>1/4 in</td><td>No</td><td>Isolate the brace effect</td></tr>
+											<tr><td>3</td><td>12 mm</td><td>No</td><td>Isolate the thickness effect</td></tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="fig-row">
+									<span class="image"><img src="images/glass-fea/pressure-field.jpg" alt="Plot of hydrostatic pressure increasing linearly with depth from 0 to 0.767 psi" /></span>
+									<span class="image"><img src="images/glass-fea/geometry.jpg" alt="Panel geometry, 48.5 by 21.25 inches, with edge restraints and center-brace region" /></span>
+								</div>
+								<p class="fig-caption">Left: hydrostatic pressure applied to the panel. Right: panel geometry and restraints, with the center-brace region used in Case 1.</p>
+								<span class="image main"><img src="images/glass-fea/mesh.jpg" alt="Structured quad shell mesh of the front glass panel in Patran" /></span>
+								<p class="fig-caption">Structured 0.5&nbsp;in Quad4 shell mesh, reused for all three cases so the comparison stays controlled.</p>
+
+								<h4>Results</h4>
+								<div class="fig-row">
+									<span class="image"><img src="images/glass-fea/case1-displacement.jpg" alt="Case 1 out-of-plane displacement contour" /></span>
+									<span class="image"><img src="images/glass-fea/case1-stress.jpg" alt="Case 1 maximum principal stress contour with hotspot at the brace" /></span>
+								</div>
+								<p class="fig-caption"><strong>Case 1, 1/4 in with brace:</strong> 0.069&nbsp;in maximum deflection, but a 5.0&nbsp;ksi local stress peak where the brace meets the glass.</p>
+								<div class="fig-row">
+									<span class="image"><img src="images/glass-fea/case2-displacement.jpg" alt="Case 2 out-of-plane displacement contour" /></span>
+									<span class="image"><img src="images/glass-fea/case2-stress.jpg" alt="Case 2 maximum principal stress contour" /></span>
+								</div>
+								<p class="fig-caption"><strong>Case 2, 1/4 in without brace:</strong> the panel bows as one plate, reaching 0.531&nbsp;in maximum deflection and 2.8&nbsp;ksi peak stress.</p>
+								<div class="fig-row">
+									<span class="image"><img src="images/glass-fea/case3-displacement.jpg" alt="Case 3 out-of-plane displacement contour" /></span>
+									<span class="image"><img src="images/glass-fea/case3-stress.jpg" alt="Case 3 maximum principal stress contour" /></span>
+								</div>
+								<p class="fig-caption"><strong>Case 3, 12 mm without brace:</strong> same deformation shape as Case 2, but only 0.079&nbsp;in deflection and 0.79&nbsp;ksi peak stress.</p>
+								<div class="fig-row">
+									<span class="image"><img src="images/glass-fea/displacement-chart.jpg" alt="Bar chart of maximum displacement for the three cases" /></span>
+									<span class="image"><img src="images/glass-fea/stress-chart.jpg" alt="Bar chart of maximum principal tensile stress for the three cases" /></span>
+								</div>
+								<p class="fig-caption">Maximum out-of-plane displacement and maximum principal tensile stress for all three cases.</p>
+
+								<h4>Takeaways</h4>
+								<ul>
+									<li><strong>Both methods control bowing.</strong> A center brace cut deflection by 87%, and 12&nbsp;mm glass cut it by 85%.</li>
+									<li><strong>Thicker glass gives the lowest stress overall.</strong> Increasing the thickness 1.89&times; reduced deflection by 6.7&times;, which closely matches the thickness-cubed relationship from plate bending theory.</li>
+									<li><strong>A brace creates a local stress hotspot.</strong> Treated as a rigid point restraint, the brace raised the peak tensile stress by 78% at its ends. A real brace is more compliant and would spread that load, so this is a modeling upper bound, not a design verdict.</li>
+								</ul>
+								<p>I verified the model by checking force balance: the applied load and the support reactions both came to 395.43&nbsp;lbf in every case. Next steps would be a mesh-convergence study and a compliant brace-contact model before using these results to make design-safety decisions.</p>
+								<p><strong>Tools:</strong> MSC Patran, MSC Nastran (SOL 101 linear statics)</p>
 								<hr />
 
 								<h3>Protein Skimmer Air-Inlet Dryer</h3>
