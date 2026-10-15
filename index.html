@@ -78,8 +78,14 @@
 									<span class="image"><img src="images/fsae-team-autocross.jpg" alt="Jayhawk Motorsports team posing with car number 21 at an autocross event" /></span>
 								</div>
 								<p class="fig-caption">Left: the 2026 car's accumulator open in the shop for HV/LV electrical work. Right: the Jayhawk Motorsports team with the car at an autocross event.</p>
-								<p>Designing the high-voltage tractive battery (accumulator) for the 2027 Formula SAE car, with a goal of reducing its size by 25% compared to the previous design.</p>
-								<p><strong>Tools:</strong> SolidWorks, HV/LV electrical systems</p>
+								<p>Designing the high-voltage tractive battery (accumulator) for the 2027 Formula SAE car, with a goal of reducing pack size by 25% compared to the previous design. The pack is built around Molicel P50B cells.</p>
+								<p>Along with the pack itself, I'm designing how it integrates with the rest of the car's high-voltage system:</p>
+								<ul>
+									<li><strong>Precharge circuit:</strong> brings the motor controller's capacitors up to pack voltage gradually before the main contactors close, preventing a damaging inrush current.</li>
+									<li><strong>Battery management system (BMS):</strong> monitors cell voltages and temperatures and shuts the system down if any cell leaves its safe operating range.</li>
+									<li><strong>Insulation monitoring device (IMD):</strong> continuously checks for insulation faults between the high-voltage system and the chassis.</li>
+								</ul>
+								<p><strong>Tools:</strong> SolidWorks, HV/LV electrical design and diagnostics</p>
 								<hr />
 
 								<h3>FSAE Aerodynamics: CFD and On-Track Validation</h3>
@@ -195,7 +201,7 @@
 								<p><strong>Aerodynamics &amp; Electrical Team Member</strong><br />
 								<em>Lawrence, KS &middot; June 2026 &ndash; Present</em></p>
 								<ul>
-									<li>Designing the 2027 car's high-voltage tractive battery (accumulator), targeting a 25% size reduction</li>
+									<li>Designing the 2027 car's accumulator around Molicel P50B cells, along with the precharge circuit, BMS, and IMD integration, targeting a 25% reduction in pack size</li>
 									<li>Collaborating with a 52-member team of senior capstone engineers and underclassman volunteers to design the 2027 competition car</li>
 									<li>Ran CFD simulations in STAR-CCM+ on 2027 aerodynamic designs, evaluating downforce and L/D and analyzing streamlines to guide design selection</li>
 									<li>Instrumented aero devices with pitot tubes and Kiel probes and analyzed on-track data in MoTeC i2, M1 Build, and M1 Tune to validate CFD predictions</li>
