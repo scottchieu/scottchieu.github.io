@@ -13,6 +13,25 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<style>
+			/* Background photo: Jayhawk Motorsports cars on Jayhawk Blvd */
+			#bg:after { background-image: url("images/bg-jayhawks.jpg"); background-position: center 60%; }
+			#bg:before {
+				background-image:
+					radial-gradient(ellipse at center, rgba(19, 21, 25, 0.55) 0%, rgba(19, 21, 25, 0.25) 60%, rgba(19, 21, 25, 0.45) 100%),
+					url("images/overlay.png");
+				background-size: cover, 256px 256px;
+				background-repeat: no-repeat, repeat;
+			}
+			#header .content .inner, #header .logo { text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6); }
+			#header .content, #header nav ul {
+				background: rgba(19, 21, 25, 0.5);
+				-webkit-backdrop-filter: blur(6px);
+				backdrop-filter: blur(6px);
+			}
+			#header nav ul { border-radius: 4px; }
+			@media screen and (orientation: portrait) {
+				#bg:after { background-position: 68% center; }
+			}
 			#projects .image:before { display: none; }
 			.fig-row { display: flex; gap: 1rem; margin-bottom: 0.5rem; }
 			.fig-row .image { flex: 1; margin: 0; }
